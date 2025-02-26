@@ -19,8 +19,14 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public List<TodoDto> listAll() {
-        return todoRepository.findAll()
-            .stream()
-            .map(e -> TodoMapper.ToDto(e)).toList();
+        
+            List<TodoDto> todos = todoRepository.findAll()
+                .stream()
+                .map(e -> TodoMapper.ToDto(e))
+                .toList();
+
+            return todos; //[]
+        
+        
     }
 }

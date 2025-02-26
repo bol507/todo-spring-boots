@@ -24,7 +24,16 @@ public class TodoController {
 
     @GetMapping
     public ResponseEntity<List<TodoDto>> listAll() {
-        return ResponseEntity.ok(todoService.listAll());
+        try {
+            List<TodoDto> todos = todoService.listAll();
+            if(todos.isEmpty()){
+                return ResponseEntity.status(404).build();
+            }
+
+            return ResponseEntity.ok(todos);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
    
 
