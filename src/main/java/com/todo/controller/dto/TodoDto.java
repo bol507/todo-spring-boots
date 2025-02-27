@@ -1,4 +1,4 @@
-package com.todo.controller.dtro;
+package com.todo.controller.dto;
 
 import java.time.LocalDate;
 import java.util.UUID;

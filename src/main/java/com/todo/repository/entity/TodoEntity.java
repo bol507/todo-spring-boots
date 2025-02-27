@@ -28,12 +28,12 @@ public class TodoEntity extends AbstractEntity {
     private LocalDate dateCreated;
 
     @Column(name = "is_completed")
-    private boolean isCompleted;
+    private boolean completed;
 
     @Column(name = "is_archived")
-    private boolean isArchived;
+    private boolean archived;
 
     @Column(name = "is_reminder")
-    private boolean isReminder;
+    private boolean reminder;
 
 }
