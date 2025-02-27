@@ -1,6 +1,7 @@
 package com.todo.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,13 +40,13 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateProduct(@PathVariable("id") Integer id, @RequestBody ProductItem product ){
+    public ResponseEntity<Void> updateProduct(@PathVariable("id") UUID id, @RequestBody ProductItem product ){
         productService.update(id,product);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable("id") Integer id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable("id") UUID id) {
         productService.delete(id);
         return ResponseEntity.ok().build();
     }

@@ -17,11 +17,11 @@ public abstract class AbstractEntity implements Serializable {
     
     @Id
     @Column(name = "id", updatable = false, nullable = false)
-    private String id;
+    private UUID id;
 
     @PrePersist
     public void prePersist() {
-        this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID();
     }
 
 }

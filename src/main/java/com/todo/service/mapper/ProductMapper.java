@@ -15,6 +15,7 @@ public class ProductMapper {
         dto.setDescription(entity.getDescription());
         dto.setPrice(entity.getPrice());
         dto.setQuantity(entity.getQuantity());
+        dto.setActive(entity.isActive());
         return dto;
     }
 
@@ -23,6 +24,7 @@ public class ProductMapper {
         entity.setDescription(dto.getDescription());
         entity.setPrice(dto.getPrice());
         entity.setQuantity(dto.getQuantity());
+        entity.setActive(dto.isActive());
         return entity;
     }
 

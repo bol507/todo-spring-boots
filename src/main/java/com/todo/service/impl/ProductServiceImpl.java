@@ -1,15 +1,12 @@
 package com.todo.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import com.todo.controller.dto.ProductItem;
 import com.todo.exception.EntityNotFoundException;
-import com.todo.exception.ProductNotFoundException;
 import com.todo.repository.ProductRepository;
 import com.todo.repository.entity.ProductEntity;
 import com.todo.service.ProductService;
@@ -23,10 +20,19 @@ import lombok.RequiredArgsConstructor;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;   
+
+    @PostConstruct
+    public void init() {
+        // Imprimir las variables de entorno para verificar su carga
+        System.out.println("DB_URL: " + System.getenv("DB_URL"));
+        System.out.println("DB_USER: " + System.getenv("DB_USER"));
+        System.out.println("DB_PASS: " + System.getenv("DB_PASS"));
+    }
     
     @Override
     public List<ProductItem> list() {
-        return productRepository.findAll().stream()
+        List<ProductEntity> entities = productRepository.findByActive(true);
+        return entities.stream()
                 .map(e -> ProductMapper.toDto(e))
                 .toList();
     }
@@ -34,6 +40,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void create(ProductItem product) {
         ProductEntity entity = ProductMapper.fromDtoEntity(product, new ProductEntity());
+        entity.setActive(true);
         productRepository.save(entity);
     }
 
@@ -43,6 +50,9 @@ public class ProductServiceImpl implements ProductService {
         if(opt.isEmpty()){
             throw new EntityNotFoundException("Entity not found");
         }
+        if(Boolean.FALSE.equals(opt.get().isActive())){
+            throw new EntityNotFoundException("Product "+id+" was previously deleted");
+        }   
         ProductEntity entity = opt.get();
         ProductMapper.fromDtoEntity(product, entity);
         productRepository.save(entity);
@@ -50,15 +60,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void delete(UUID id) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'delete'");
-        Optional<ProductItem> opt = products.stream()
-            .filter(e -> Objects.equals(e.getId(), id)).findAny();
+        
+        Optional<ProductEntity> opt = productRepository.findByIdAndActive(id,true);
+            
         if(opt.isEmpty()){
-            throw new RuntimeException("Prodcut not found");
+            throw new EntityNotFoundException("No entity found with id "+id+" to delete");
         }
-        ProductItem result = opt.get();
-        products.remove(result);
+        ProductEntity entity = opt.get();
+        entity.setActive(false);
+        productRepository.save(entity);
     }
 
 }

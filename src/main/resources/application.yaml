@@ -4,4 +4,11 @@ spring:
   datasource:
     url: ${DB_URL}
     username: ${DB_USER}
-    password: ${DB_PASS}
+    password: ${DB_PASS} 
+  jpa:
+    hibernate:
+      ddl-auto: create  # O 'create', 'create-drop', 'validate', 'update', 'none'
+
+server:
+  port: 8080
+      
