@@ -32,18 +32,15 @@ public class ProductEntity extends AbstractEntity {
     private String description;
 
     @Column(name = "price")
-    @Positive
     private double price;
 
     @Column(name = "quantity")
-    @Positive
     private int quantity;
 
     @Column(name = "active")
     private boolean active;
 
     @Column(name = "storage")
-    @Positive
     private Integer storage;
 
     @CreatedDate
