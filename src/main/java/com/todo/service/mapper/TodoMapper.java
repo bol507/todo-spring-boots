@@ -1,6 +1,6 @@
 package com.todo.service.mapper;
 
-import com.todo.controller.dtro.TodoDto;
+import com.todo.controller.dto.TodoDto;
 import com.todo.repository.entity.TodoEntity;
 
 public class TodoMapper {
@@ -8,7 +8,7 @@ public class TodoMapper {
     private TodoMapper() {
     }
     
-    public static TodoDto ToDto(TodoEntity entity) {
+    public static TodoDto toDto(TodoEntity entity) {
         TodoDto dto = new TodoDto();
         dto.setId(entity.getId());
         dto.setTask(entity.getTask());
@@ -20,7 +20,7 @@ public class TodoMapper {
         return dto;
     }
 
-    public static TodoEntity FromDtoToEntity(TodoDto dto, TodoEntity entity) {
+    public static TodoEntity toEntity(TodoDto dto, TodoEntity entity) {
         entity.setTask(dto.getTask());
         entity.setDueDate(dto.getDueDate());
         entity.setDateCreated(dto.getDateCreated());
