@@ -40,14 +40,9 @@ public class TodoController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createTodo(@RequestBody TodoDto todo){
-        try{
-            todoService.create(todo);
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        } catch (Exception e) {
-            return ResponseEntity.status(500).build();
-        }
-        
+    public ResponseEntity<Void> create(@RequestBody TodoDto todo){
+        todoService.create(todo);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }

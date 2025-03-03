@@ -20,7 +20,7 @@ public class TodoMapper {
         return dto;
     }
 
-    public static TodoEntity fromDtoToEntity(TodoDto dto, TodoEntity entity) {
+    public static TodoEntity toEntity(TodoDto dto, TodoEntity entity) {
         entity.setTask(dto.getTask());
         entity.setDueDate(dto.getDueDate());
         entity.setDateCreated(dto.getDateCreated());

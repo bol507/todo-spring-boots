@@ -14,8 +14,8 @@ public class TodoDto {
     private String task;
     private LocalDate dueDate;
     private LocalDate dateCreated;
-    private boolean isCompleted;
-    private boolean isArchived;
-    private boolean isReminder;
+    private boolean completed;
+    private boolean archived;
+    private boolean reminder;
 
 }
