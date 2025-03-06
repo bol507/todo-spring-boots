@@ -45,4 +45,18 @@ public class TodoServiceImpl implements TodoService {
         TodoMapper.toEntity(todo, entity);
         todoRepository.save(entity);
     }
+
+    @Override
+    public void delete(UUID id) {
+        
+        Optional<TodoEntity> opt = todoRepository.findById(id);
+            
+        if(opt.isEmpty()){
+            throw new EntityNotFoundException("No entity found with id "+id+" to delete");
+        }
+        TodoEntity entity = opt.get();
+        entity.setCompleted(true);
+        todoRepository.save(entity);
+    }
+
 }

@@ -10,4 +10,5 @@ public interface TodoService {
     List<TodoDto> listAll();
     void create(TodoDto todo);
     void update(UUID id, TodoDto todo);
+    void delete(UUID id);
 }
